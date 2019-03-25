@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Product } from 'src/app/model/product';
 import { Comment } from '../model/comment';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  constructor() { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
   private products: Product[] = [
     new Product(1,"Angular1",99,3,"Angular 1 detail",["编程语言","硬件设备"]),
@@ -19,14 +22,14 @@ export class ProductService {
   ];
 
   private comments: Comment[] = [
-    new Comment(1,1,"2019-03-20 14:05:12","张三",3,"hello ！"),
-    new Comment(2,1,"2019-03-20 14:05:12","李四",5,"hello angular1 is so beautiful！"),
-    new Comment(2,2,"2019-03-20 14:05:12","李四",3,"hello ！"),
-    new Comment(3,3,"2019-03-20 14:05:12","王五",3,"hello ！"),
-    new Comment(4,4,"2019-03-20 14:05:12","赵六",3,"hello ！"),
+    new Comment(1,1,"2019/3/21 上午11:28:27","张三",3,"hello ！"),
+    new Comment(2,1,"2019/3/21 上午11:28:27","李四",5,"hello angular1 is so beautiful！"),
+    new Comment(2,2,"2019/3/21 上午11:28:27","李四",3,"hello ！"),
+    new Comment(3,3,"2019/3/21 上午11:28:27","王五",3,"hello ！"),
+    new Comment(4,4,"2019/3/21 上午11:28:27","赵六",3,"hello ！"),
   ];
 
-  public getProducts(): Product[]{
+  public getProducts(){
     return this.products;
   }
 
@@ -36,6 +39,10 @@ export class ProductService {
 
   public getCommentsForProductId(id:number): Comment[]{
     return this.comments.filter((comment:Comment) => comment.productId == id);
+  }
+
+  public getAllCategories(): string[]{
+    return ["编程语言","硬件设备","图书","电子设备"];
   }
 
 }
